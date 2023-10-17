@@ -62,9 +62,10 @@ class geometric_shape:
         return f"{self.__class__.__name__}(x={self.x}, y={self.y})"
 
     def __str__(self):
-        '''Stromg representation for end user.''' 
+        '''String representation for end user.''' 
         return f"A {self.__class__.__name__} at the position ({self.x}, {self.y})"
     
-# Källhänvisningar
-# För dockstrings '''https://www.geeksforgeeks.org/python-docstrings/'''
-# För overloading '''https://www.geeksforgeeks.org/operator-overloading-in-python/'''
+# Citations
+# For dockstrings https://www.geeksforgeeks.org/python-docstrings/
+# For overloading https://www.geeksforgeeks.org/operator-overloading-in-python/
+# For override https://stackoverflow.com/questions/1436703/what-is-the-difference-between-str-and-repr
