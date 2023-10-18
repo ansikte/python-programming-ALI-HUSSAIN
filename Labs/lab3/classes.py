@@ -16,16 +16,17 @@ class geometric_shape:
         '''Calculate and return the circumference/perimeter of  the geometric shape.'''
         raise NotImplementedError("Subclasses should imeplement this.")
     
-    def check_if_inside(self, px, py):
+    def is_inside(self, px, py):
         '''Check if (px, py) is inside the geometric shape. Should be implemented by subclasses.'''
         raise NotImplementedError("Subclasses should implement this.")
 
     def translate(self, dx, dy):
         '''Move the shape (x, y) by changing (dx, dy) recpectively.'''
-        if not isinstance(dx, (int, float) or not isinstance(dy, int,float)):
-            raise ValueError("Values for moving the shape must be numeric.")
+        if not isinstance(dx, (int, float)) or not isinstance(dy, (int, float)):
+            raise ValueError("Values for moving the shape must be numeric")
         self.x += dx
         self.y += dy
+
 
     def __eq__(self, other):
         '''Check if this shape is equal to another shape based on area.'''
@@ -51,7 +52,7 @@ class geometric_shape:
             return self.area > other.area
         return False
     
-    def _ge__(self, other):
+    def __ge__(self, other):
         '''Check is this shapes area is than or equal to other shape area'''
         if isinstance(other, geometric_shape):
             return self.area >= other.area
@@ -64,7 +65,36 @@ class geometric_shape:
     def __str__(self):
         '''String representation for end user.''' 
         return f"A {self.__class__.__name__} at the position ({self.x}, {self.y})"
+
+
+import math
+
+class Circle(geometric_shape):
+    '''This class represents a circle'''
+
+    def __init__(self, x=0, y=0, radius=1):
+        '''Initialize center position and radius of the circle.'''
+        super().__init__(x, y)
+        self.radius = radius
+
+    @property
+    def area(self):
+        '''Calculate and return the area of the circle.'''
+        return math.pi * self.radius ** 2
     
+    @property
+    def circumference(self):
+        '''Calculate and return the circumference of the circel.'''
+        return math.pi * self.radius
+    
+    def is_inside(self, px, py):
+        '''Check if the point (px, py) is inside the circle.'''
+        return (px - self.x) ** 2 + (py - self.y) ** 2 <= self.radius ** 2
+    
+    def is_unit_circle(self):
+        '''Check if the circle instance is a unit circle'''
+        return self.radius == 1
+
 # Citations
 # For dockstrings https://www.geeksforgeeks.org/python-docstrings/
 # For overloading https://www.geeksforgeeks.org/operator-overloading-in-python/
